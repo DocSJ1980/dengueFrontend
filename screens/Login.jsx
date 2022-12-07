@@ -2,6 +2,8 @@ import { View, StatusBar, Platform, StyleSheet, Text, TouchableOpacity, SafeArea
 import React, { useEffect, useState } from 'react'
 import { Avatar, Button, TextInput } from 'react-native-paper'
 import { useUserLoginMutation } from '../src/services/authApi'
+import { ApiProvider } from '@reduxjs/toolkit/dist/query/react'
+import { productsApi, useGetAllProductsQuery } from '../src/services/productsApi'
 // import { useNavigation } from '@react-navigation/native'
 
 
@@ -15,8 +17,8 @@ const Login = () => {
         await userLogin({ email, password })
     }
     useEffect(() => {
-        console.log(responseInfo.isError)
-    }, [responseInfo.isError])
+        console.log(responseInfo)
+    }, [responseInfo])
 
     return (
         <SafeAreaView>
@@ -28,7 +30,11 @@ const Login = () => {
                     <TouchableOpacity onPress={loginHandler} style={Styles.btn}>
                         <Text style={{ color: "#ffffff" }}>Login</Text>
                     </TouchableOpacity>
+                    {responseInfo.isError && <Text style={{ justifyContent: 'center', color: "red", alignItems: 'center', alignSelf: 'center' }}>Error: {responseInfo.error.data.message}</Text>}
+
+                    {responseInfo.isSuccess && <Text style={{ justifyContent: 'center', color: "#076f29", alignItems: 'center', alignSelf: 'center' }}>Logged in successfully.!</Text>}
                 </View>
+
                 <View>
                     <Text style={{ marginTop: 130, justifyContent: 'center', alignSelf: 'center', color: "#076f29", alignItems: 'center' }} >Powered by Epidemics Prevention & Control Cell</Text>
                     <Text style={{ justifyContent: 'center', color: "#076f29", alignItems: 'center', alignSelf: 'center' }}>District Health Authority Rawalpindi</Text>
