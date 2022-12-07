@@ -12,15 +12,16 @@ import {
   Text
 } from 'react-native';
 import Main from './Main';
-
-/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
- * LTI update could not be added via codemod */
+import store from './src/services/store.jsx'
+import { Provider } from 'react-redux'
 
 const App = () => {
 
   return (
     <SafeAreaView >
-      <Main />
+      <Provider store={store}>
+        <Main />
+      </Provider>
     </SafeAreaView>
   );
 };

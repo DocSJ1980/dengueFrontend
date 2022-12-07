@@ -1,6 +1,7 @@
 import { View, StatusBar, Platform, StyleSheet, Text, TouchableOpacity, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Avatar, Button, TextInput } from 'react-native-paper'
+import { useUserLoginMutation } from '../src/services/authApi'
 // import { useNavigation } from '@react-navigation/native'
 
 
@@ -8,9 +9,14 @@ const Login = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     // const navigation = useNavigation()
-    const loginHandler = () => {
+    const [userLogin, responseInfo] = useUserLoginMutation()
+    const loginHandler = async () => {
         console.log("Login Button working", email, password)
+        await userLogin({ email, password })
     }
+    useEffect(() => {
+        console.log(responseInfo.isError)
+    }, [responseInfo.isError])
 
     return (
         <SafeAreaView>
