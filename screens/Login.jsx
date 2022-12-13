@@ -1,9 +1,9 @@
 import { View, StatusBar, Platform, StyleSheet, Text, TouchableOpacity, SafeAreaView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Avatar, Button, TextInput } from 'react-native-paper'
-import { useUserLoginMutation } from '../src/services/authApi'
+import { useUserLoginMutation } from '../services/authApi'
 import { ApiProvider } from '@reduxjs/toolkit/dist/query/react'
-import { productsApi, useGetAllProductsQuery } from '../src/services/productsApi'
+import { productsApi, useGetAllProductsQuery } from '../services/productsApi'
 // import { useNavigation } from '@react-navigation/native'
 
 
